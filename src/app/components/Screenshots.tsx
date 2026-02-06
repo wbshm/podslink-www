@@ -3,13 +3,13 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import findImg from 'figma:asset/348809c5a724e50e324d932cf7f7cb9c996bb546.png';
-import widgetImg from 'figma:asset/0c7fdc1c6aa62d6c1a991d37989c4c250d09f2ff.png';
-import eqImg from 'figma:asset/007be8019058f7d55bc5ef7cfaa29d9ad9e116c3.png';
-import moreImg from 'figma:asset/7e1fcf8b15214368748c410bbcdcc395e5ccd4c2.png';
-import popupImg from 'figma:asset/bc20cf9ee63381995a4a312366b73db907eb3a22.png';
-import batteryImg from 'figma:asset/f9f196447b8fbd6c7ef46e10ad4d3a6be57b2754.png';
-import gestureImg from 'figma:asset/47583318d10fd1a54ad59a9f0831247a6acc5b2b.png';
+import findImg from '@/assets/348809c5a724e50e324d932cf7f7cb9c996bb546.png';
+import widgetImg from '@/assets/0c7fdc1c6aa62d6c1a991d37989c4c250d09f2ff.png';
+import eqImg from '@/assets/007be8019058f7d55bc5ef7cfaa29d9ad9e116c3.png';
+import moreImg from '@/assets/7e1fcf8b15214368748c410bbcdcc395e5ccd4c2.png';
+import popupImg from '@/assets/bc20cf9ee63381995a4a312366b73db907eb3a22.png';
+import batteryImg from '@/assets/f9f196447b8fbd6c7ef46e10ad4d3a6be57b2754.png';
+import gestureImg from '@/assets/47583318d10fd1a54ad59a9f0831247a6acc5b2b.png';
 
 interface ScreenshotCardProps {
   image: string;

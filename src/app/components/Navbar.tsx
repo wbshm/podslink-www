@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import imgAppIcon from "figma:asset/769d0a29245202fd1627047491876bc9538d8a02.png";
+import imgAppIcon from "@/assets/769d0a29245202fd1627047491876bc9538d8a02.png";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +17,16 @@ export function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setShowLangMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const navLinks = [
@@ -96,18 +108,49 @@ export function Navbar() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-3">
-             {/* Language Switcher */}
-             <button
-               onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
-               className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all ${
-                 isScrolled 
-                   ? 'hover:bg-black/5 text-[#1d1d1f]/80' 
-                   : 'hover:bg-white/40 text-[#1d1d1f]/90'
-               }`}
-            >
-               <Globe size={14} />
-               <span>{language === 'en' ? 'CN' : 'EN'}</span>
-            </button>
+             {/* Language Switcher Dropdown */}
+             <div className="relative hidden md:block" ref={langMenuRef}>
+               <button
+                 onClick={() => setShowLangMenu(!showLangMenu)}
+                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium transition-all ${
+                   isScrolled 
+                     ? 'hover:bg-black/5 text-[#1d1d1f]/80' 
+                     : 'hover:bg-white/40 text-[#1d1d1f]/90'
+                 }`}
+              >
+                 <Globe size={16} />
+                 <span>{language === 'en' ? 'English' : '中文'}</span>
+              </button>
+
+              <AnimatePresence>
+                {showLangMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 mt-2 w-28 bg-white/90 backdrop-blur-xl rounded-xl shadow-lg border border-black/5 overflow-hidden p-1"
+                  >
+                    <button
+                      onClick={() => { setLanguage('en'); setShowLangMenu(false); }}
+                      className={`w-full text-left px-3 py-2 text-[13px] rounded-lg transition-colors ${
+                        language === 'en' ? 'bg-black/5 font-semibold text-[#1d1d1f]' : 'text-[#1d1d1f]/70 hover:bg-black/5'
+                      }`}
+                    >
+                      English
+                    </button>
+                    <button
+                      onClick={() => { setLanguage('zh'); setShowLangMenu(false); }}
+                      className={`w-full text-left px-3 py-2 text-[13px] rounded-lg transition-colors ${
+                        language === 'zh' ? 'bg-black/5 font-semibold text-[#1d1d1f]' : 'text-[#1d1d1f]/70 hover:bg-black/5'
+                      }`}
+                    >
+                      中文
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+             </div>
 
             <a 
               href="https://play.google.com/store/apps/details?id=net.podslink"
@@ -175,13 +218,22 @@ export function Navbar() {
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ delay: 0.3, duration: 0.5 }}
               >
-                  <button
-                     onClick={() => { setLanguage(language === 'en' ? 'zh' : 'en'); setMobileMenuOpen(false); }}
-                     className="text-[18px] font-medium text-[#86868b] flex items-center gap-2 hover:text-[#1d1d1f] transition-colors"
-                  >
-                     <Globe size={20} />
-                     {language === 'en' ? 'Switch to Chinese' : '切换到英文'}
-                  </button>
+                  {/* Mobile Language Switcher */}
+                  <div className="flex items-center gap-4">
+                     <button
+                       onClick={() => { setLanguage('en'); setMobileMenuOpen(false); }}
+                       className={`text-[18px] font-medium transition-colors ${language === 'en' ? 'text-[#1d1d1f]' : 'text-[#86868b]'}`}
+                     >
+                       English
+                     </button>
+                     <div className="w-[1px] h-4 bg-[#d2d2d7]" />
+                     <button
+                       onClick={() => { setLanguage('zh'); setMobileMenuOpen(false); }}
+                       className={`text-[18px] font-medium transition-colors ${language === 'zh' ? 'text-[#1d1d1f]' : 'text-[#86868b]'}`}
+                     >
+                       中文
+                     </button>
+                  </div>
               </motion.div>
               
               <motion.div

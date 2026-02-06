@@ -66,7 +66,7 @@ const translations = {
       title: "Ready to upgrade?",
       subtitle: "Join thousands of users enjoying the best AirPods experience on Android.",
       download: "Download Now",
-      copyright: "© 2024 PodsLink."
+      copyright: "© 2024 PodsLink. Designed by Apple fans."
     }
   },
   zh: {
@@ -132,7 +132,7 @@ const translations = {
       title: "准备好升级体验了吗？",
       subtitle: "加入数万用户，在安卓上享受最好的 AirPods 体验。",
       download: "立即下载",
-      copyright: "© 2024 PodsLink."
+      copyright: "© 2024 PodsLink. 由果粉为果粉设计。"
     }
   }
 };

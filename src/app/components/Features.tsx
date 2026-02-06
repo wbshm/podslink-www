@@ -2,13 +2,13 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Bluetooth, Zap, MapPin, Headphones } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import gesturesImage from 'figma:asset/439b5dcb8eb28c49de4510d11a631c0947942605.png';
-import imgImageLeftEarbud from "figma:asset/a155c358c86f8304676cc799d11f21f2cb863c40.png";
-import imgImageRightEarbud from "figma:asset/41f58edab280c981b3bc47ce35ce4bf050386819.png";
-import imgImageChargingCase from "figma:asset/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
-import popupBgDark from "figma:asset/4ca469331e858a56ad25f7e01047c493a3abb53f.png";
-import widgetImage from "figma:asset/0e54b9ec2fcde479d2f719056d6b413c9d8a60d4.png";
-import featuresTitleImage from "figma:asset/fabfdcba3cd7a8d72f22f6bc40a88c08d10a4fd0.png";
+import gesturesImage from '@/assets/439b5dcb8eb28c49de4510d11a631c0947942605.png';
+import imgImageLeftEarbud from "@/assets/a155c358c86f8304676cc799d11f21f2cb863c40.png";
+import imgImageRightEarbud from "@/assets/41f58edab280c981b3bc47ce35ce4bf050386819.png";
+import imgImageChargingCase from "@/assets/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
+import popupBgDark from "@/assets/4ca469331e858a56ad25f7e01047c493a3abb53f.png";
+import widgetImage from "@/assets/0e54b9ec2fcde479d2f719056d6b413c9d8a60d4.png";
+import featuresTitleImage from "@/assets/fabfdcba3cd7a8d72f22f6bc40a88c08d10a4fd0.png";
 
 // --- Visual Components ---
 

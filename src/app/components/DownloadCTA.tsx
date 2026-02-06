@@ -3,7 +3,7 @@ import { motion, useInView, useScroll, useTransform } from 'motion/react';
 import { Download } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from '../context/LanguageContext';
-import imgAppIcon from 'figma:asset/769d0a29245202fd1627047491876bc9538d8a02.png';
+import imgAppIcon from '@/assets/769d0a29245202fd1627047491876bc9538d8a02.png';
 
 export function DownloadCTA() {
   const { t } = useLanguage();

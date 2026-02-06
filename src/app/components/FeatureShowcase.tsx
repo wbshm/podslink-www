@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
-import batteryImg from 'figma:asset/6e812bb7e63d2f943b654de229f85774032fb81b.png';
-import popupImg from 'figma:asset/a07553c3382655fba627ccca11c1cb2e10bb3450.png';
-import gestureImg from 'figma:asset/c8889515e8578414e75f962a7eb111650af013b7.png';
+import batteryImg from '@/assets/6e812bb7e63d2f943b654de229f85774032fb81b.png';
+import popupImg from '@/assets/a07553c3382655fba627ccca11c1cb2e10bb3450.png';
+import gestureImg from '@/assets/c8889515e8578414e75f962a7eb111650af013b7.png';
 
 interface ShowcaseItemProps {
   image: string;

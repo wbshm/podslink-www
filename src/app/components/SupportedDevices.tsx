@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useSpring, useMotionValue, useTransform, useMotionTemplate } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import beatsWatermark from 'figma:asset/1c7b35a9b8314c34c5d33a6286fc602d84267537.png';
+import beatsWatermark from '@/assets/1c7b35a9b8314c34c5d33a6286fc602d84267537.png';
 
 // Bolder, thicker, Apple-style iconography
 

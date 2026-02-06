@@ -1,4 +1,4 @@
-import imgObject from "figma:asset/33c660328585b48e4baf2ebc2234da2f3ecc8371.png";
+import imgObject from "@/assets/33c660328585b48e4baf2ebc2234da2f3ecc8371.png";
 
 export default function ImageGroup() {
   return (

@@ -1,10 +1,10 @@
 import svgPaths from "./svg-a75h2yv1ww";
-import imgImageAppIcon from "figma:asset/abbc2071c0b33fc58dd7232fe961862c9a203409.png";
-import imgImageBattery from "figma:asset/4b0e8e1efc2830ca8de70ed8d6bd3dff3e1bd192.png";
-import imgImageLeftEarbud from "figma:asset/a155c358c86f8304676cc799d11f21f2cb863c40.png";
-import imgImageRightEarbud from "figma:asset/41f58edab280c981b3bc47ce35ce4bf050386819.png";
-import imgImageChargingCase from "figma:asset/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
-import imgAirPodsPopupContent from "figma:asset/8024f77b0b7e0e60d2416d34edda92fcbf17d73c.png";
+import imgImageAppIcon from "@/assets/abbc2071c0b33fc58dd7232fe961862c9a203409.png";
+import imgImageBattery from "@/assets/4b0e8e1efc2830ca8de70ed8d6bd3dff3e1bd192.png";
+import imgImageLeftEarbud from "@/assets/a155c358c86f8304676cc799d11f21f2cb863c40.png";
+import imgImageRightEarbud from "@/assets/41f58edab280c981b3bc47ce35ce4bf050386819.png";
+import imgImageChargingCase from "@/assets/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
+import imgAirPodsPopupContent from "@/assets/8024f77b0b7e0e60d2416d34edda92fcbf17d73c.png";
 
 function Heading() {
   return (

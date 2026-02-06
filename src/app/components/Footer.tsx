@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import imgAppIcon from "figma:asset/769d0a29245202fd1627047491876bc9538d8a02.png";
+import imgAppIcon from "@/assets/769d0a29245202fd1627047491876bc9538d8a02.png";
 
 export function Footer() {
   const { t, language } = useLanguage();
@@ -25,7 +25,7 @@ export function Footer() {
         </div>
 
         {/* Links */}
-        <div className="flex gap-8 text-[13px] text-[#424245] font-medium mb-8">
+        <div className="flex gap-8 text-[13px] text-[#424245] font-medium">
           {linkData.map((link, index) => (
              <a 
                key={index} 
@@ -37,13 +37,6 @@ export function Footer() {
                {link.text}
              </a>
           ))}
-        </div>
-
-        {/* Copyright */}
-        <div className="flex flex-col items-center gap-4">
-          <p className="text-[12px] text-[#86868b]">
-             {t.footer.copyright}
-          </p>
         </div>
 
       </div>

@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import { ChevronRight, X, Wifi, Signal, Search, Smartphone } from 'lucide-react';
 import { motion, useTransform, useMotionValue } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import imgImageLeftEarbud from "figma:asset/a155c358c86f8304676cc799d11f21f2cb863c40.png";
-import imgImageRightEarbud from "figma:asset/41f58edab280c981b3bc47ce35ce4bf050386819.png";
-import imgImageChargingCase from "figma:asset/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
-import imgAirPodsReal from "figma:asset/33c660328585b48e4baf2ebc2234da2f3ecc8371.png";
-import imgAppIcon from "figma:asset/769d0a29245202fd1627047491876bc9538d8a02.png";
+import imgImageLeftEarbud from "@/assets/a155c358c86f8304676cc799d11f21f2cb863c40.png";
+import imgImageRightEarbud from "@/assets/41f58edab280c981b3bc47ce35ce4bf050386819.png";
+import imgImageChargingCase from "@/assets/d8d06419e330cf1485bef7885bd2c061eb03f5e3.png";
+import imgAirPodsReal from "@/assets/33c660328585b48e4baf2ebc2234da2f3ecc8371.png";
+import imgAppIcon from "@/assets/769d0a29245202fd1627047491876bc9538d8a02.png";
 
 // Pixel-perfect Battery Icon Component with Animation
 function BatteryIcon({ percent, delay = 0 }: { percent: number, delay?: number }) {
