@@ -33,6 +33,7 @@ export function Navbar() {
     { name: t.navbar.features, href: '#features' },
     { name: t.navbar.screenshots, href: '#screenshots' },
     { name: t.navbar.supported, href: '#supported' },
+    { name: t.navbar.faq, href: 'https://help.podslink.net', external: true },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -90,10 +91,12 @@ export function Navbar() {
           {/* Center: Minimalist Links (Desktop) */}
           <div className="hidden md:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
-              <a 
+              <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleScrollTo(e, link.href)}
+                onClick={link.external ? undefined : (e) => handleScrollTo(e, link.href)}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
                 className="relative group py-2"
               >
                 <span className={`text-[13px] font-medium tracking-wide uppercase transition-colors duration-300 ${
@@ -203,7 +206,9 @@ export function Navbar() {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
+                  onClick={link.external ? () => setMobileMenuOpen(false) : (e) => handleScrollTo(e, link.href)}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + idx * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

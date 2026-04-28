@@ -7,9 +7,11 @@ export function Footer() {
   const { t, language } = useLanguage();
   
   const linkData = language === 'en' ? [
+    { text: t.footer.faq, href: 'https://help.podslink.net' },
     { text: 'Privacy Policy', href: 'https://www.podslink.net/privacy' },
     { text: 'Terms of Service', href: 'https://www.podslink.net/agreement' }
   ] : [
+    { text: t.footer.faq, href: 'https://help.podslink.net' },
     { text: '隐私政策', href: 'https://www.podslink.net/privacy' },
     { text: '服务协议', href: 'https://www.podslink.net/agreement' }
   ];

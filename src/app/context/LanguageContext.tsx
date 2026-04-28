@@ -8,6 +8,7 @@ const translations = {
       features: "Features",
       screenshots: "Interface",
       supported: "Supported",
+      faq: "FAQ",
       download: "Download"
     },
     hero: {
@@ -66,6 +67,7 @@ const translations = {
       title: "Ready to upgrade?",
       subtitle: "Join thousands of users enjoying the best AirPods experience on Android.",
       download: "Download Now",
+      faq: "FAQ",
       copyright: "© 2024 PodsLink. Designed by Apple fans."
     }
   },
@@ -74,6 +76,7 @@ const translations = {
       features: "核心功能",
       screenshots: "界面预览",
       supported: "支持设备",
+      faq: "常见问题",
       download: "下载"
     },
     hero: {
@@ -132,6 +135,7 @@ const translations = {
       title: "准备好升级体验了吗？",
       subtitle: "加入数万用户，在安卓上享受最好的 AirPods 体验。",
       download: "立即下载",
+      faq: "常见问题",
       copyright: "© 2024 PodsLink. 由果粉为果粉设计。"
     }
   }
