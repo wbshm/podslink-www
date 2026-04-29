@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ChevronLeft, ExternalLink, House } from 'lucide-react';
+import Zooming from 'zooming';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
 import { NotFoundPage } from './NotFoundPage';
@@ -14,13 +15,16 @@ function normalizeRoute(pathname: string) {
 }
 
 function getSectionLabel(route: string) {
+  const section = getSection(route);
+  return section?.title ?? 'Help Center';
+}
+
+function getSection(route: string) {
   for (const section of helpSections) {
     if (section.items.some((item) => item.href === route)) {
-      return section.title;
+      return section;
     }
   }
-
-  return 'Help Center';
 }
 
 function resolveDocAssetPath(assetPath: string, route: string) {
@@ -57,6 +61,35 @@ function renderDocHtml(html: string, route: string) {
 export function DocsPage() {
   const currentRoute = normalizeRoute(window.location.pathname);
   const doc = helpDocsByRoute[currentRoute];
+  const zoomingRef = useRef<Zooming | null>(null);
+
+  useEffect(() => {
+    if (!doc) {
+      return;
+    }
+
+    if (!zoomingRef.current) {
+      zoomingRef.current = new Zooming({
+        bgColor: 'rgb(0, 0, 0)',
+        bgOpacity: 0.96,
+        scaleBase: 1,
+        enableGrab: true,
+        zIndex: 1200,
+        onBeforeOpen: (target) => {
+          target.style.borderRadius = '0';
+        },
+        onClose: (target) => {
+          target.style.borderRadius = '';
+        },
+      });
+    }
+
+    zoomingRef.current.listen('.help-markdown img');
+
+    return () => {
+      zoomingRef.current?.close();
+    };
+  }, [doc]);
 
   if (!doc) {
     return <NotFoundPage />;
@@ -65,9 +98,9 @@ export function DocsPage() {
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
       <Navbar />
-      <main className="px-6 pb-20 pt-28 lg:px-8">
+      <main className="px-4 pb-20 pt-24 sm:px-6 lg:px-8 lg:pt-28">
         <div className="mx-auto max-w-[1280px]">
-          <div className="mb-6 flex flex-wrap items-center gap-3 text-[13px] font-medium text-[#6e6e73]">
+          <div className="mb-6 hidden flex-wrap items-center gap-3 text-[13px] font-medium text-[#6e6e73] lg:flex">
             <a href="/" className="inline-flex items-center gap-1.5 transition-colors hover:text-[#1d1d1f]">
               <House size={14} />
               <span>PodsLink</span>
@@ -81,7 +114,7 @@ export function DocsPage() {
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-            <aside className="lg:sticky lg:top-28 lg:self-start">
+            <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
               <div className="overflow-hidden rounded-[28px] border border-black/5 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
                 <div className="border-b border-black/5 px-6 py-5">
                   <div className="text-[12px] font-semibold uppercase tracking-[0.24em] text-[#6e6e73]">
@@ -129,13 +162,21 @@ export function DocsPage() {
 
             <article className="overflow-hidden rounded-[32px] border border-black/5 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.05)]">
               <div className="border-b border-black/5 px-6 py-8 sm:px-10">
-                <div className="mb-3 text-[12px] font-semibold uppercase tracking-[0.24em] text-[#86868b]">
-                  {getSectionLabel(doc.route)}
+                <div className="mb-3 flex items-start justify-between gap-4">
+                  <div className="text-[12px] font-semibold uppercase tracking-[0.24em] text-[#86868b]">
+                    {getSectionLabel(doc.route)}
+                  </div>
+                  <a
+                    href="/help"
+                    className="inline-flex h-11 min-w-11 items-center justify-center rounded-full border border-black/5 bg-[#f5f5f7] px-4 text-[13px] font-medium text-[#1d1d1f] shadow-[0_8px_20px_rgba(0,0,0,0.06)] lg:hidden"
+                  >
+                    Guide
+                  </a>
                 </div>
-                <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-[#1d1d1f] sm:text-4xl">
+                <h1 className="max-w-3xl text-[28px] font-semibold tracking-tight text-[#1d1d1f] sm:text-4xl">
                   {doc.title}
                 </h1>
-                <div className="mt-5 flex flex-wrap gap-3">
+                <div className="mt-5 hidden flex-wrap gap-3 sm:flex">
                   <a
                     href="/"
                     className="inline-flex items-center gap-2 rounded-full bg-[#1d1d1f] px-4 py-2 text-[14px] font-medium text-white transition-transform hover:-translate-y-0.5"
