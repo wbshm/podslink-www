@@ -31,6 +31,6 @@ export default defineConfig({
   assetsInclude: ['**/*.svg', '**/*.csv'],
 
   server: {
-    host: '192.168.31.114',
+    host: true,
   },
 })

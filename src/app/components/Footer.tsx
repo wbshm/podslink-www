@@ -7,13 +7,13 @@ export function Footer() {
   const { t, language } = useLanguage();
   
   const linkData = language === 'en' ? [
-    { text: t.footer.faq, href: 'https://help.podslink.net' },
-    { text: 'Privacy Policy', href: 'https://www.podslink.net/privacy' },
-    { text: 'Terms of Service', href: 'https://www.podslink.net/agreement' }
+    { text: t.footer.faq, href: '/help' },
+    { text: 'Privacy Policy', href: '/privacy' },
+    { text: 'Terms of Service', href: '/agreement' }
   ] : [
-    { text: t.footer.faq, href: 'https://help.podslink.net' },
-    { text: '隐私政策', href: 'https://www.podslink.net/privacy' },
-    { text: '服务协议', href: 'https://www.podslink.net/agreement' }
+    { text: t.footer.faq, href: '/help' },
+    { text: '隐私政策', href: '/privacy' },
+    { text: '服务协议', href: '/agreement' }
   ];
 
   return (
@@ -32,8 +32,6 @@ export function Footer() {
              <a 
                key={index} 
                href={link.href} 
-               target="_blank"
-               rel="noopener noreferrer"
                className="hover:text-[#1d1d1f] hover:underline transition-colors"
              >
                {link.text}

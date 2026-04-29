@@ -1,0 +1,194 @@
+[
+  {
+    "route": "/account-deletion",
+    "assetDirectory": null
+  },
+  {
+    "route": "/agreement",
+    "assetDirectory": null
+  },
+  {
+    "route": "/basic/attention",
+    "assetDirectory": null
+  },
+  {
+    "route": "/basic/auto_pop_up",
+    "assetDirectory": "content/help/basic/auto_pop_up"
+  },
+  {
+    "route": "/basic/battery_display",
+    "assetDirectory": "content/help/basic/battery_display"
+  },
+  {
+    "route": "/basic/headset_models",
+    "assetDirectory": null
+  },
+  {
+    "route": "/basic/intro",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/add_widgets",
+    "assetDirectory": "content/help/faq/add_widgets"
+  },
+  {
+    "route": "/faq/battery_not_update",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/cacurate_power",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/call_noise",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/charging_not_displayed",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/connect",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/headset_name",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/in_ear_detection",
+    "assetDirectory": "content/help/faq/in_ear_detection"
+  },
+  {
+    "route": "/faq/no_sound",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/noise_cancellation",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/noise_reduction",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/not_pop_up",
+    "assetDirectory": "content/help/faq/not_pop_up"
+  },
+  {
+    "route": "/faq/notification_bar",
+    "assetDirectory": "content/help/faq/notification_bar"
+  },
+  {
+    "route": "/faq/power_consumption",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/recognition",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/repaire",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/spatial_audio",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/status_bar",
+    "assetDirectory": "content/help/faq/status_bar"
+  },
+  {
+    "route": "/faq/stealing",
+    "assetDirectory": null
+  },
+  {
+    "route": "/faq/volume_light",
+    "assetDirectory": null
+  },
+  {
+    "route": "/func/advaced_theme",
+    "assetDirectory": null
+  },
+  {
+    "route": "/func/audio_control",
+    "assetDirectory": null
+  },
+  {
+    "route": "/func/broadcast",
+    "assetDirectory": "content/help/func/broadcast"
+  },
+  {
+    "route": "/func/dynamic_pop",
+    "assetDirectory": "content/help/func/dynamic_pop"
+  },
+  {
+    "route": "/func/find_device",
+    "assetDirectory": "content/help/func/find_device"
+  },
+  {
+    "route": "/func/gesture_control",
+    "assetDirectory": null
+  },
+  {
+    "route": "/func/notification_bar",
+    "assetDirectory": "content/help/func/notification_bar"
+  },
+  {
+    "route": "/func/theme",
+    "assetDirectory": "content/help/func/theme"
+  },
+  {
+    "route": "/func/widget",
+    "assetDirectory": "content/help/func/widget"
+  },
+  {
+    "route": "/help",
+    "assetDirectory": null
+  },
+  {
+    "route": "/privacy",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/huawei_back",
+    "assetDirectory": "content/help/rel/huawei_back"
+  },
+  {
+    "route": "/rel/huawei_widget",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/oppo_back",
+    "assetDirectory": "content/help/rel/oppo_back"
+  },
+  {
+    "route": "/rel/oppo_widget",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/other_back",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/update",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/vivo_back",
+    "assetDirectory": "content/help/rel/vivo_back"
+  },
+  {
+    "route": "/rel/vivo_widget",
+    "assetDirectory": null
+  },
+  {
+    "route": "/rel/xiaomi_back",
+    "assetDirectory": "content/help/rel/xiaomi_back"
+  },
+  {
+    "route": "/rel/xiaomi_widget",
+    "assetDirectory": null
+  }
+]

@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import imgAppIcon from "@/assets/769d0a29245202fd1627047491876bc9538d8a02.png";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
   const langMenuRef = useRef<HTMLDivElement>(null);
+  const isLandingPage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,10 +33,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: t.navbar.features, href: '#features' },
-    { name: t.navbar.screenshots, href: '#screenshots' },
-    { name: t.navbar.supported, href: '#supported' },
-    { name: t.navbar.faq, href: 'https://help.podslink.net', external: true },
+    { name: t.navbar.features, href: '#features', type: 'section' },
+    { name: t.navbar.screenshots, href: '#screenshots', type: 'section' },
+    { name: t.navbar.supported, href: '#supported', type: 'section' },
+    { name: t.navbar.faq, href: '/help', type: 'route' },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -72,7 +75,11 @@ export function Navbar() {
         <div className="max-w-[1200px] mx-auto px-6 h-full flex items-center justify-between">
           
           {/* Left: Brand */}
-          <a href="#" onClick={(e) => handleScrollTo(e, '#')} className="flex items-center gap-3 group">
+          <a
+            href="/"
+            onClick={isLandingPage ? (e) => handleScrollTo(e, '#') : undefined}
+            className="flex items-center gap-3 group"
+          >
             <div className="relative overflow-hidden rounded-[10px]">
               <img 
                 src={imgAppIcon} 
@@ -93,10 +100,8 @@ export function Navbar() {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href}
-                onClick={link.external ? undefined : (e) => handleScrollTo(e, link.href)}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
+                href={link.type === 'section' && !isLandingPage ? `/${link.href}` : link.href}
+                onClick={link.type === 'section' && isLandingPage ? (e) => handleScrollTo(e, link.href) : undefined}
                 className="relative group py-2"
               >
                 <span className={`text-[13px] font-medium tracking-wide uppercase transition-colors duration-300 ${
@@ -205,10 +210,14 @@ export function Navbar() {
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
-                  href={link.href}
-                  onClick={link.external ? () => setMobileMenuOpen(false) : (e) => handleScrollTo(e, link.href)}
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  href={link.type === 'section' && !isLandingPage ? `/${link.href}` : link.href}
+                  onClick={
+                    link.type === 'section'
+                      ? isLandingPage
+                        ? (e) => handleScrollTo(e, link.href)
+                        : () => setMobileMenuOpen(false)
+                      : () => setMobileMenuOpen(false)
+                  }
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + idx * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
