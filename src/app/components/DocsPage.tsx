@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { ChevronLeft, ExternalLink, House } from 'lucide-react';
-import Zooming from 'zooming';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ChevronLeft, ExternalLink, House, X } from 'lucide-react';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
 import { NotFoundPage } from './NotFoundPage';
@@ -59,37 +59,59 @@ function renderDocHtml(html: string, route: string) {
 }
 
 export function DocsPage() {
+  const [previewImage, setPreviewImage] = useState<{
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  } | null>(null);
   const currentRoute = normalizeRoute(window.location.pathname);
   const doc = helpDocsByRoute[currentRoute];
-  const zoomingRef = useRef<Zooming | null>(null);
+  const initialPreviewScale = useMemo(() => {
+    if (!previewImage || typeof window === 'undefined') {
+      return 1;
+    }
+
+    const safeWidth = previewImage.width || 1;
+    const safeHeight = previewImage.height || 1;
+    const viewportWidth = Math.max(window.innerWidth - 24, 1);
+    const viewportHeight = Math.max(window.innerHeight - 24, 1);
+
+    return Math.min(viewportWidth / safeWidth, viewportHeight / safeHeight);
+  }, [previewImage]);
+  const initialPreviewPosition = useMemo(() => {
+    if (!previewImage || typeof window === 'undefined') {
+      return { x: 0, y: 0 };
+    }
+
+    const scaledWidth = previewImage.width * initialPreviewScale;
+    const scaledHeight = previewImage.height * initialPreviewScale;
+
+    return {
+      x: (window.innerWidth - scaledWidth) / 2,
+      y: (window.innerHeight - scaledHeight) / 2,
+    };
+  }, [initialPreviewScale, previewImage]);
 
   useEffect(() => {
-    if (!doc) {
+    if (!previewImage) {
       return;
     }
 
-    if (!zoomingRef.current) {
-      zoomingRef.current = new Zooming({
-        bgColor: 'rgb(0, 0, 0)',
-        bgOpacity: 0.96,
-        scaleBase: 1,
-        enableGrab: true,
-        zIndex: 1200,
-        onBeforeOpen: (target) => {
-          target.style.borderRadius = '0';
-        },
-        onClose: (target) => {
-          target.style.borderRadius = '';
-        },
-      });
-    }
+    document.body.style.overflow = 'hidden';
 
-    zoomingRef.current.listen('.help-markdown img');
-
-    return () => {
-      zoomingRef.current?.close();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setPreviewImage(null);
+      }
     };
-  }, [doc]);
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [previewImage]);
 
   if (!doc) {
     return <NotFoundPage />;
@@ -196,6 +218,21 @@ export function DocsPage() {
               <div className="px-6 py-8 sm:px-10">
                 <div
                   className="help-markdown"
+                  onClick={(event) => {
+                    const target = event.target as HTMLElement;
+                    const image = target.closest('img');
+
+                    if (!(image instanceof HTMLImageElement)) {
+                      return;
+                    }
+
+                    setPreviewImage({
+                      src: image.currentSrc || image.src,
+                      alt: image.alt || doc.title,
+                      width: image.naturalWidth || image.width || 1,
+                      height: image.naturalHeight || image.height || 1,
+                    });
+                  }}
                   dangerouslySetInnerHTML={{ __html: renderDocHtml(doc.html, doc.route) }}
                 />
               </div>
@@ -213,6 +250,65 @@ export function DocsPage() {
           </div>
         </div>
       </main>
+      {previewImage ? (
+        <div className="fixed inset-0 z-[1300] bg-black">
+          <button
+            type="button"
+            className="absolute inset-0"
+            aria-label="Close image preview"
+            onClick={() => setPreviewImage(null)}
+          />
+          <button
+            type="button"
+            onClick={() => setPreviewImage(null)}
+            className="absolute right-4 top-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/12 text-white backdrop-blur"
+            aria-label="Close image preview"
+          >
+            <X size={18} />
+          </button>
+          <div className="relative z-[1] h-full w-full">
+            <TransformWrapper
+              key={previewImage.src}
+              initialScale={initialPreviewScale}
+              initialPositionX={initialPreviewPosition.x}
+              initialPositionY={initialPreviewPosition.y}
+              minScale={Math.max(initialPreviewScale * 0.8, 0.2)}
+              maxScale={8}
+              centerZoomedOut
+              doubleClick={{ disabled: true }}
+              pinch={{ step: 5 }}
+              wheel={{ step: 0.12 }}
+              panning={{ velocityDisabled: true }}
+            >
+              <TransformComponent
+                wrapperClass="h-full w-full"
+                wrapperStyle={{
+                  width: '100%',
+                  height: '100%',
+                  overflow: 'hidden',
+                }}
+                contentStyle={{
+                  width: `${previewImage.width}px`,
+                  height: `${previewImage.height}px`,
+                }}
+              >
+                <img
+                  src={previewImage.src}
+                  alt={previewImage.alt}
+                  className="block max-w-none select-none"
+                  style={{
+                    width: `${previewImage.width}px`,
+                    height: `${previewImage.height}px`,
+                    maxWidth: 'none',
+                    maxHeight: 'none',
+                    borderRadius: 0,
+                  }}
+                />
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
+        </div>
+      ) : null}
       <Footer />
     </div>
   );
