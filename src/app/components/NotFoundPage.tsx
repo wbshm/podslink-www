@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Search } from 'lucide-react';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
 
 export function NotFoundPage() {
+  useEffect(() => {
+    document.title = 'Page Not Found | PodsLink';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-[#1d1d1f]">
       <Navbar />

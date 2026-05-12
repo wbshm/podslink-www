@@ -113,6 +113,20 @@ export function DocsPage() {
     };
   }, [previewImage]);
 
+  useEffect(() => {
+    if (!doc) {
+      document.title = 'PodsLink Help Center';
+      return;
+    }
+
+    if (doc.route === '/help') {
+      document.title = 'PodsLink FAQ';
+      return;
+    }
+
+    document.title = `${doc.title} | PodsLink FAQ`;
+  }, [doc]);
+
   if (!doc) {
     return <NotFoundPage />;
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DownloadCTA } from './DownloadCTA';
 import { Features } from './Features';
 import { Footer } from './Footer';
@@ -8,6 +8,10 @@ import { Screenshots } from './Screenshots';
 import { SupportedDevices } from './SupportedDevices';
 
 export function LandingPage() {
+  useEffect(() => {
+    document.title = 'PodsLink';
+  }, []);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-white font-sans text-[#1d1d1f]">
       <Navbar />
